@@ -1,0 +1,155 @@
+ 
+<style>
+ 
+
+
+	.view-details{
+        border: none !important;
+        overflow: visible;
+        display: inline-block;
+        background: #444;
+        width: auto;
+        margin: 0;
+        cursor: pointer;
+        height: 40px;
+        line-height: 40px;
+        white-space: nowrap;
+        font-size: 14px !important;
+        text-transform: uppercase;
+        font-weight: 400;
+        position: relative;
+        padding: 0 14px !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+    }
+
+    .view-details:hover{
+        background-color: #ff3c58;
+    }
+    
+ 
+
+    .productkundu-list{
+        width: 100%;
+        overflow: auto;
+    }
+
+    .productkundu-item{
+        width: 28%;
+        float: left;
+        text-align: center;
+        padding: 1%; 
+        margin: 1%;
+    }
+ 
+    .productkundu-image{
+        height: 250px;
+    }
+    .productkundu-image img{
+        max-width: 90%;
+        max-height: 250px;
+    }
+ 
+ 
+
+
+
+
+    @media screen and (max-width: 700px) {
+        .marchent-data{
+            width: 45%;
+            float: left; 
+            border: 1px solid #41921182;
+            margin: 5px;
+            height: 185px;
+            padding: 5px;
+        }
+    }
+
+    @media screen and (max-width: 650px) {
+        .marchent-data{
+            width: 80%;
+            float: left; 
+            border: 1px solid #41921182;
+            margin: 5px;
+            height: 185px;
+            padding: 5px;
+        }
+    }
+
+
+    @media screen and (max-width: 650px) {
+        .productkundu-item{
+            width: 45%;
+            float: left;
+            text-align: center;
+            padding: 1%; 
+            margin: 1%;
+        }
+
+        .marchent-list {
+            width: 100%;
+            height: auto;
+        }
+
+        .merchant-img img{
+            height: 180px;
+        }
+	}
+
+
+
+    @media screen and (max-width: 425px) {
+        .productkundu-item{
+            width: 90%;
+            float: left;
+            text-align: center;
+            padding: 1%; 
+            margin: 1%;
+            margin-bottom: 40px;
+        }
+ 
+	}
+
+
+    .page-title-wrapper{
+        text-align: center!important;
+    }
+</style>
+
+
+ 
+
+
+<?php 
+$productCollection = $block->getProducts(); 
+?>
+
+
+
+
+<div class="productkundu-list">
+
+    <?php 
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+        $store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+        foreach ($productCollection as $product) {
+            $image_url = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
+
+    ?>
+
+    <div class="productkundu-item"> 
+        <div class="productkundu-image">
+            <img src="<?php echo $image_url ?>" alt="" >
+        </div>
+
+        <div class="productkundu-info">
+            <p class="kundu-name"><?php echo $product->getName() ?></p> 
+            <a href="<?php echo $product->getProductUrl() ?>" target="_blank" title="click to view details" class="view-details">View Details</a>
+        </div>
+    </div>
+
+<?php  }?>
